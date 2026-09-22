@@ -30,9 +30,3 @@ runs:
               "url": "https://maven.pkg.github.com/bootiful-media-mogul/artifacts"
             }
           ]
-
-    - run: |
-
-        SETTINGS_PATH="${HOME}/.m2/settings.xml"
-        cat $SETTINGS_PATH
-        echo "MAVEN_ARGS=-s $SETTINGS_PATH" >> $GITHUB_ENV
