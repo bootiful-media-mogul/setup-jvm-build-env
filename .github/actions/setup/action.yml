@@ -1,6 +1,14 @@
 name: 'Setup Maven & GraalVM Environment'
 description: 'Sets up GraalVM JDK 25.0.2, generates Maven settings.xml, and exports MAVEN_ARGS'
 
+inputs:
+  gh_user:
+    description: 'GitHub Username for Maven Registry'
+    required: true
+  gh_token:
+    description: 'GitHub Access Token / PAT for Maven Registry'
+    required: true
+
 runs:
   using: 'composite'
   steps:
@@ -8,7 +16,7 @@ runs:
       with:
         java-version: '25.0.2'
         distribution: 'graalvm'
-        github-token: ${{ env.GITHUB_TOKEN }}
+        github-token: ${{ inputs.gh_token }}
         cache: maven
 
     - name: Generate Maven settings.xml
@@ -18,8 +26,8 @@ runs:
           [
             {
               "id": "github",
-              "username": "${{ env.GH_USER }}",
-              "password": "${{ env.GH_TOKEN }}"
+              "username": "${{ inputs.gh_user }}",
+              "password": "${{ inputs.gh_token }}"
             }
           ]
         repositories: |
